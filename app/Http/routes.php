@@ -14,7 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
 Route::auth();
-
 Route::get('/home', 'HomeController@index');
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
+	Route::get('/', 'admin\UserController@index');
+	Route::resource('/users', 'admin\UserController', ['only' => [
+	    'index', 'show', 'edit', 'update', 'destroy'
+	]]);
+});
