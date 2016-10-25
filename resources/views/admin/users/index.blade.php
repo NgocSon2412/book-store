@@ -25,7 +25,6 @@
 		                        <th>Admin</th>
 		                        <th>Create date</th>
 		                        <th>Update date</th>
-		                        <th>Action</th>
 		                    </tr>
 		                </thead>
 		                <tbody>
@@ -39,16 +38,6 @@
 			                        <td>{{ $user->admin }}</td>
 			                        <td>{{ $user->created_at }}</td>
 			                        <td>{{ $user->updated_at }}</td>
-			                        <td>
-			                        	<form action="{{ url('/admin/users/'.$user->id) }}" method="POST">
-                                            {{ csrf_field() }}
-                                            {{ method_field('DELETE') }}
-
-                                            <button type="submit" id="delete-user-{{ $user->id }}" class="btn btn-danger">
-                                                <i class="fa fa-btn fa-trash"></i>Delete
-                                            </button>
-                                        </form>
-			                        </td>
 		                    	</tr>
 		                	@endforeach
 		                </tbody>

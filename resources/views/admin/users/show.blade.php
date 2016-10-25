@@ -33,7 +33,14 @@
                         	@endif
                         </li>
                     </ul>
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target=".user_form_edit"><i class="fa fa-edit m-right-xs"></i> Edit Profile</button>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12 profile_left">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target=".user_form_edit"><i class="fa fa-edit m-right-xs"></i> Edit Profile</button>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 profile_left">
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".user_form_delete"><i class="fa fa-btn fa-trash"></i> Delete</button>
+                        </div>
+                    </div>
                     <div class="modal fade user_form_edit" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -80,7 +87,30 @@
                                 </div>
                             </div>
                         </div>
-                    </div>   
+                    </div>
+                    <div class="modal fade user_form_delete" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> </button>
+                                    <h4 class="modal-title" id="myModalLabel">Delete User</h4> </div>
+                                <div class="modal-body">
+                                    <form action="{{ url('/admin/users/'.$user->id) }}" method="POST">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+                                        <h3 style="text-align: center;">You are ok? </h3>
+                                        <div class="form-group">
+                                            <div class="modal-footer"> <a class="btn btn-default" data-dismiss="modal">Cancel</a>
+                                                <button type="submit" id="delete-user-{{ $user->id }}" class="btn btn-danger">
+                                                    <i class="fa fa-btn fa-trash"></i> Delete
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                 
                 </div>
                 <div class="col-md-9 col-sm-9 col-xs-12">
                     <div class="row">
