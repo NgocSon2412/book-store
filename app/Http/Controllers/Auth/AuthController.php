@@ -69,4 +69,11 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+    protected function authenticated($request,$user){
+        if($user->admin === 1){
+            return redirect()->intended('/admin'); //redirect to admin panel
+        }
+
+        return redirect()->intended('/'); //redirect to standard user homepage
+    }
 }
