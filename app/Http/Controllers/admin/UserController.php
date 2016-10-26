@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
+use DB;
 
 class UserController extends Controller
 {
@@ -15,6 +16,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $users = User::all();
@@ -57,14 +59,20 @@ class UserController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255',
         ]);
-        $user->update($request->all());
-        if($request->role == 'Administrator') {
-            $user->admin = 1;
-        } else {
-            $user->admin = 0;
+        if (DB::table('users')->where('email', $request->email)->count() == 0 || $user->email == $request->email) {
+            $user->update($request->all());
+            if($request->role == 'Administrator') {
+                $user->admin = 1;
+            } else {
+                $user->admin = 0;
+            }
+            $user->save();
+            session()->flash('flash_message', 'Your User has edited ! ');
+            Session()->flash('alert-class', 'alert-success'); 
+        }else {
+            session()->flash('flash_message', 'User name has been existed ! ');
+            Session()->flash('alert-class', 'alert-danger'); 
         }
-        $user->save();
-        session()->flash('flash_message', 'Your Post has been edited ! ');
         return redirect('/admin/users/' . $user->id);
     }
 
@@ -78,7 +86,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        session()->flash('flash_message', 'Your Post has been deleted ! ');
+        session()->flash('flash_message', 'Your User has been deleted ! ');
         return redirect('/admin/users');
     }
 }

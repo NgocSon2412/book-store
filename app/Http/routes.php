@@ -21,4 +21,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
 	Route::resource('/users', 'admin\UserController', ['only' => [
 	    'index', 'show', 'edit', 'update', 'destroy'
 	]]);
+	Route::resource('categories', 'admin\CategoryController');
 });

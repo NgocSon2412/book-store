@@ -63,41 +63,14 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a><i class="fa fa-desktop"></i> Categories <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="#">ALl Categories</a>
-                                        </li>
-                                        <li><a href="#">New Category</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a><i class="fa fa-user-secret"></i> Authors <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="#">All Authors</a>
-                                        </li>
-                                        <li><a href="#">New Author</a>
-                                        </li>
-                                    </ul>
-                                </li>
                                 <li><a><i class="fa fa fa-book"></i> Books <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="chartjs.html">All Books</a>
-                                        </li>
-                                        <li><a href="chartjs2.html">New Book</a>
-                                        </li>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a><i class="fa fa-clone"></i>Comments <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="fixed_sidebar.html">All Comments</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a><i class="fa fa-star"></i>Rates <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="fixed_sidebar.html">All Rates</a>
-                                        </li>
+                                        <li><a href="chartjs.html">All Books</a></li>
+                                        <li><a href="chartjs2.html">New Book</a></li>
+                                        <li><a href="{{ url('admin/categories') }}">Categories</a></li>
+                                        <li><a href="#">Authors</a></li>
+                                        <li><a href="fixed_sidebar.html">All Comments</a></li>
+                                        <li><a href="fixed_sidebar.html">All Rates</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -144,7 +117,7 @@
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         @if (Session::has('flash_message'))
-                            <p class="alert alert-success">
+                            <p class="alert {{ Session::get('alert-class')}}">
                                 {{ Session::get('flash_message')}}
                             </p>
                         @endif
