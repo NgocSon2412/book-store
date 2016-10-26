@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Category;
-use DB;
-class CategoryController extends Controller
+use App\Author;
+
+class AuthorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('admin.categories.index', ['categories' => $categories]);
+        $authors = Author::all();
+        return view('admin.authors.index', ['authors' => $authors]);
     }
 
     /**
@@ -40,11 +40,11 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|unique:categories|max:255',
+            'name' => 'required|max:255',
             'description' => 'required',
         ]);
-        Category::create($request->all());
-        return redirect('/admin/categories');
+        Author::create($request->all());
+        return redirect('/admin/authors');
     }
 
     /**
@@ -55,7 +55,8 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $author = Author::find($id);
+        return view('admin.authors.show', ['author' => $author]);
     }
 
     /**
@@ -66,8 +67,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::find($id);
-        return view('admin.categories.edit', ['category' => $category]);
+        $author = Author::find($id);
+        return view('admin.authors.edit', ['author' => $author]);
     }
 
     /**
@@ -79,21 +80,21 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $category = Category::find($id);
+        $author = Author::find($id);
         $this->validate($request, [
             'name' => 'required|max:255',
             'description' => 'required',
         ]);
-        if (DB::table('categories')->where('name', $request->name)->count() == 0 || $category->name == $request->name) {
-            $category->update($request->all());
-            $category->save();
-            session()->flash('flash_message', 'Your Category has not edited ! ');
-            Session()->flash('alert-class', 'alert-success'); 
-        }else {
-            session()->flash('flash_message', 'Your Category has been existed ! ');
-            Session()->flash('alert-class', 'alert-danger'); 
+
+        $author->update($request->all());
+        $author->save();
+        session()->flash('flash_message', 'Your Author has edited ! ');
+        Session()->flash('alert-class', 'alert-success');
+        if (url()->previous() == 'http://localhost/book_store/admin/authors/'.$author->id) {
+            return redirect(url()->previous());
+        } else {
+            return redirect('/admin/authors');
         }
-        return redirect('/admin/categories');
     }
 
     /**
@@ -104,9 +105,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::find($id);
-        $category->delete();
-        session()->flash('flash_message', 'Your Category has been deleted ! ');
-        return redirect('/admin/categories');
+        $author = Author::find($id);
+        $author->delete();
+        session()->flash('flash_message', 'Your Author has been deleted ! ');
+        return redirect('/admin/authors');
     }
 }
