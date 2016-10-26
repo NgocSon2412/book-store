@@ -7,9 +7,13 @@
 @section('content')
 
 	<div class="col-md-12 col-sm-12 col-xs-12">
-	    <div class="">
+	    <div class="x_panel">
 	        <div class="x_title">
 	            <h2>All Users</small></h2>
+	            <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a> </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a> </li>
+                </ul>
 	            <div class="clearfix"></div>
 	        </div>
 	        <div class="x_content">
@@ -33,8 +37,10 @@
 			                        <td>
 			                            <input type="checkbox" class="flat" name="table_records">
 			                        </td>
-			                        <td><a href="{{ url('/admin/users/'.$user->id) }}">{{ $user->name }}</a></td>
-			                        <td><a href="{{ url('/admin/users/'.$user->id) }}">{{ $user->email }}</a></td>
+			                        <td class="sorting_1">
+			                        	<a href="{{ url('/admin/users/'.$user->id) }}" class="text-success">{{ $user->name }}</a>
+			                        </td>
+			                        <td><a href="{{ url('/admin/users/'.$user->id) }}" class="text-success">{{ $user->email }}</a></td>
 			                        <td>{{ $user->admin }}</td>
 			                        <td>{{ $user->created_at }}</td>
 			                        <td>{{ $user->updated_at }}</td>
