@@ -68,7 +68,7 @@
                                         <li><a href="chartjs.html">All Books</a></li>
                                         <li><a href="chartjs2.html">New Book</a></li>
                                         <li><a href="{{ url('admin/categories') }}">Categories</a></li>
-                                        <li><a href="#">Authors</a></li>
+                                        <li><a href="{{ url('admin/authors') }}">Authors</a></li>
                                         <li><a href="fixed_sidebar.html">All Comments</a></li>
                                         <li><a href="fixed_sidebar.html">All Rates</a></li>
                                     </ul>
